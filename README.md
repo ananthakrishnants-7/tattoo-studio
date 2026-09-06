@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tattoo Studio — Full-Stack Booking Platform
 
-## Getting Started
+A modern, full-stack tattoo studio website built with Next.js, TypeScript, Prisma, and MySQL.
 
-First, run the development server:
+The project combines a public-facing studio website with a secure admin dashboard for managing artists, portfolio work, studio information, and appointment requests.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Public Website
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Modern responsive tattoo studio landing page
+- Dynamic artist profiles
+- Dynamic tattoo portfolio
+- Artist-specific portfolio work
+- Appointment booking form
+- Artist selection during booking
+- Appointment date validation
+- Booking conflict detection
+- Dynamic studio contact information
+- Instagram and WhatsApp links
+- Responsive design for desktop and mobile
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Admin Dashboard
 
-## Learn More
+- Password-protected administrator login
+- Signed, expiring admin sessions
+- View appointment requests
+- Update booking status
+- Artist management
+  - Create artists
+  - Edit artists
+  - Delete artists
+- Tattoo portfolio management
+  - Add tattoos
+  - Edit tattoos
+  - Delete tattoos
+- Studio settings management
+  - Address
+  - Phone
+  - Email
+  - Instagram
+  - WhatsApp
+  - Opening hours
+- Admin logout
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Frontend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
 
-## Deploy on Vercel
+### Backend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js App Router
+- Next.js Route Handlers
+- Prisma ORM
+- MySQL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Authentication
+
+- bcrypt password hashing
+- HTTP-only session cookie
+- HMAC-SHA256 signed admin sessions
+- Expiring authentication sessions
+
+### Development
+
+- ESLint
+- TypeScript
+- Prisma migrations
+- Git / GitHub
+
+## Architecture
+
+```text
+Browser
+   │
+   ├── Public Pages
+   │      ├── Home
+   │      ├── Artists
+   │      ├── Portfolio
+   │      └── Booking
+   │
+   └── Admin Dashboard
+          ├── Bookings
+          ├── Artists
+          ├── Tattoos
+          └── Studio Settings
+                  │
+                  ▼
+            Next.js API Routes
+                  │
+                  ▼
+                Prisma
+                  │
+                  ▼
+                MySQL
