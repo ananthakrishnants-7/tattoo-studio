@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Artist {
+  id          Int       @id @default(autoincrement())
+  name        String
+  slug        String    @unique
+  bio         String?   @db.Text
+  specialty   String?
+  instagram   String?
+  image       String?
+  createdAt   DateTime  @default(now())
+
+  tattoos     Tattoo[]
+  bookings    Booking[]
+}
+
+model Tattoo {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?   @db.Text
+  style       String
+  image       String?
+  createdAt   DateTime  @default(now())
+
+  artistId    Int
+  artist      Artist    @relation(fields: [artistId], references: [id], onDelete: Cascade)
+}
+
+model Booking {
+  id             Int      @id @default(autoincrement())
+  customerName   String
+  email          String
+  phone          String?
+  tattooStyle    String?
+  preferredDate  DateTime
+  preferredTime  String?
+  message        String?  @db.Text
+  status         BookingStatus @default(PENDING)
+  createdAt      DateTime @default(now())
+
+  artistId       Int?
+  artist         Artist?  @relation(fields: [artistId], references: [id], onDelete: SetNull)
+}
+
+model StudioSettings {
+  id            Int      @id @default(1)
+  address       String?
+  phone         String?
+  email         String?
+  instagram     String?
+  whatsapp      String?
+  openingHours  String?  @db.Text
+  updatedAt     DateTime @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
